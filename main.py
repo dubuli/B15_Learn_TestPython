@@ -1,19 +1,14 @@
-def main():
-    def n31(a):# a = initial number
-        c = 0
-        l = [a]
-        while a != 1:
-            if a % 2 == 0:#if even divide it by 2
-                a = a // 2
-            elif a % 2 == 1:#if odd 3n+1
-                a = 3*a +1
-            c += 1#counter
-            l += [a]
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+# from PyQt5.QtWidgets import QApplication, QWidget
+from ui_main import Ui_MainWindow
 
-        return l , c
-    # print(n31(43))
-    print(n31(98)[0][-1])# = a
-   # print("It took {0} steps.".format(n31(13)[1]))#optional finish
 
-if __name__ == '__main__':
-    main()
+if __name__ == '__main__':  
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+
+    ui.setupUi(MainWindow) 
+    MainWindow.show()
+    sys.exit(app.exec_()) 
