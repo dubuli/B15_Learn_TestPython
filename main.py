@@ -1,5 +1,5 @@
 ## pyuic5 -o C:\Users\zhwsd\Desktop\py\ui_main.py C:\Users\zhwsd\Desktop\py\ui_main.ui 
-##
+## pyqt5, in anaconda, use qtdesigner
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -62,23 +62,24 @@ class Ui_ALL(QtWidgets.QMainWindow):
             # modify the data
             # ifneedchange:
             # waiting: 下面这句还存在问题,不知道为什么无法取出这个格子的数据
-            strselect = self.uimain.tableWidget.item(i_line, 1).text() 
-            if strselect == '1' :
-                prsition = 1    # Precision[temp]
-                for i_row in range(self.uimain.timerowindex + 1, len(self.uimain.read_ripe)):  #read_raw[( + 1):]:
-                    rowlist = self.uimain.read_ripe[i_row].split(",")
-                    value = float(rowlist[i_line])
-                    if value < 0:
-                        value = value + 65536 * prsition
-                        value = round(value, 3)
-                    elif value > 32767 * prsition:
-                        value = value - 65536 * prsition
-                        value = round(value, 3)
-                    rowlist[i_line] = str(value)
-                    self.uimain.read_ripe[i_row] = ','.join(rowlist)
-                
-                self.uimain.textEdit.append('Dealing' + str(i_line))
-                self.uimain.textEdit.moveCursor(QtGui.QTextCursor.End)
+            if self.uimain.tableWidget.item(i_line, 1) != None :
+                strselect = self.uimain.tableWidget.item(i_line, 1).text() 
+                if strselect == '1' :
+                    prsition = 1    # Precision[temp]
+                    for i_row in range(self.uimain.timerowindex + 1, len(self.uimain.read_ripe)):  #read_raw[( + 1):]:
+                        rowlist = self.uimain.read_ripe[i_row].split(",")
+                        value = float(rowlist[i_line])
+                        if value < 0:
+                            value = value + 65536 * prsition
+                            value = round(value, 3)
+                        elif value > 32767 * prsition:
+                            value = value - 65536 * prsition
+                            value = round(value, 3)
+                        rowlist[i_line] = str(value)
+                        self.uimain.read_ripe[i_row] = ','.join(rowlist)
+                    
+                    self.uimain.textEdit.append('Dealing' + str(i_line))
+                    self.uimain.textEdit.moveCursor(QtGui.QTextCursor.End)
 
         with open(self.uimain.filename + 'change.csv', 'w') as f_out:
             f_out.writelines(self.uimain.read_ripe)
