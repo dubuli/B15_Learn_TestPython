@@ -6,4 +6,4 @@ print("var2[1:5]", var2[1:5] + 'Runnob')
 
 #!/usr/bin/python3
  
-print ("我叫 %s 今年 %d 岁!" % ('小明', 10))6
+print ("我叫 %s 今年 %d 岁!" % ('小明', 10))
