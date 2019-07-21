@@ -48,7 +48,11 @@ ZZ = np.array(data_maxtorq)
 #ZZ = 3*(X)**2 + 2*(Y)**2 + 5
 #绘制曲面，采用彩虹色着色：
 axes.plot_surface(XX, YY, ZZ,cmap='rainbow')
+# wireframe
 axes.plot_wireframe(XX, YY, ZZ,cmap='rainbow')
+# z contour
+axes.contour(XX, YY, ZZ, zdir = 'z', offset = -2, cmap = plt.get_cmap('rainbow'))
+
 plt.show()
 
 
