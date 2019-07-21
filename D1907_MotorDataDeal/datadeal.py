@@ -1,9 +1,11 @@
+
 import copy
 import re
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+#from matplotlib import pyplot as plot #用来绘制图形
+from mpl_toolkits.mplot3d import Axes3D  #用来给出三维坐标系。
 
 with open("data.txt", "r") as f:
     read_raw = f.readlines()
@@ -32,8 +34,24 @@ for line in read_raw:
     for i in range(num_maxtorqrows):
         data_maxtorq[i] = data_maxtorqTmp[i][-num_maxtorqcolumns:]
 
-plt.plot(data_maxtorq)
+
+# plt.plot(data_maxtorq)
+
+figure = plt.figure()
+#画出三维坐标系：
+axes = Axes3D(figure)
+X = np.arange(0, num_maxtorqcolumns, 1)
+Y = np.arange(0, num_maxtorqrows, 1)
+#限定图形的样式是网格线的样式：
+XX, YY = np.meshgrid(X, Y)
+ZZ = np.array(data_maxtorq)
+#ZZ = 3*(X)**2 + 2*(Y)**2 + 5
+#绘制曲面，采用彩虹色着色：
+axes.plot_surface(XX, YY, ZZ,cmap='rainbow')
+axes.plot_wireframe(XX, YY, ZZ,cmap='rainbow')
 plt.show()
 
 
 pass
+
+
