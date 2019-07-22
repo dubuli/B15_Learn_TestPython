@@ -9,8 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 #from matplotlib import pyplot as plot #用来绘制图形
 from mpl_toolkits.mplot3d import Axes3D  #用来给出三维坐标系。
-import threading  
-import time  
+
 
 # 定义Application类表示应用/窗口，继承Frame类
 class Application:
@@ -28,15 +27,11 @@ class Application:
         self.tab2 = tk.Frame(self.window)
         self.notebook.add(self.tab2, text = 'tab2')
 
-        self.btn2 = Button(self.tab1, text="datadeal", command=self.__datadealthread)
+        self.btn2 = Button(self.tab1, text="datadeal", command=self.__datadeal)
         self.btn2.pack()
 
         self.window.mainloop()
     
-    def __datadealthread(self):
-        th=threading.Thread(target=self.__datadeal,args=())  
-        th.setDaemon(True)#守护线程  
-        th.start()  
     def __datadeal(self):
 
         with open("data.txt", "r") as f:
